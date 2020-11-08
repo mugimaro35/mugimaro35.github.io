@@ -1,0 +1,64 @@
+﻿
+/* 全体 */
+body {
+color: #333;
+font-size: 13px;
+font-family: Verdana, Chicago,ＭＳ Ｐゴシック;
+background-color: #eee;
+margin-top: 3%;
+margin-right: 25%;
+margin-bottom: 5%;
+margin-left: 25%;
+}
+
+/* 文字 */
+a {
+color: #ff5500;
+text-decoration: none;
+}
+
+a:hover {
+color: #aa3300;
+}
+
+/* 罫線 */
+hr {
+height: 1px;
+border: none;
+border-top: solid 1px #777;
+}
+
+/* ヘッダーとフッター */
+header {
+font-size: 15px;
+font-weight: bold;
+margin-bottom: 1em;
+border-bottom: solid 1px #777;
+padding-bottom: 0.15em;
+}
+
+footer {
+margin-top: 1em;
+border-top: solid 1px #777;
+padding-top: 0.75em;
+text-align: center;
+height: 3em;
+} 
+
+/* その他 */
+
+.box1 {
+margin-top: 2px;
+margin-right: px;
+margin-bottom: 2px;
+margin-left: px;
+border-top: 1px dashed #ffffff;
+}
+
+.index {
+font-size: 10px;
+font-family: Verdana, Chicago,ＭＳ ゴシック;
+background-color: #000000;
+margin-top: 100px;
+margin-left: 75px;
+}
