@@ -27,8 +27,7 @@ border-top: solid 1px #777;
 
 /* 色々 */
 #wrap {
-max-width:50%;
-max-height:50%;
+max-width:650px;
 margin:0 auto;
 }
 
