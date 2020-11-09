@@ -1,4 +1,4 @@
-﻿/* 全体 */
+﻿/* body */
 body {
 color: #333;
 font-size: 13px;
@@ -8,7 +8,9 @@ margin-top: 3%;
 margin-bottom: 5%;
 }
 
-/* 文字 */
+
+
+/* linktext */
 a {
 color: #ff5500;
 text-decoration: none;
@@ -18,17 +20,27 @@ a:hover {
 color: #aa3300;
 }
 
-/* 罫線 */
+
+
+/* hr */
 hr {
 height: 1px;
 border: none;
 border-top: solid 1px #777;
 }
 
-/* 色々 */
+hr.margin {
+height: 1px;
+border: 0px;
+border-top: solid 3em #eee;
+}
+
+
+
+/* wrap, header, footer */
 #wrap {
 max-width: 650px;
-margin: 0 auto;
+margin: auto;
 }
 
 header {
@@ -47,12 +59,18 @@ text-align: center;
 height: 3em;
 } 
 
-/* その他 */
 
-.box1 {
-margin-top: 2px;
-margin-right: px;
-margin-bottom: 2px;
-margin-left: px;
-border-top: 1px dashed #ffffff;
+
+/* table */
+table.price {
+margin-left: auto;
+margin-right: auto;
+}
+
+td.product {
+width:275px;
+}
+
+td.price {
+width: 9em;	
 }
