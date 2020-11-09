@@ -1,5 +1,4 @@
-﻿
-/* 全体 */
+﻿/* 全体 */
 body {
 color: #333;
 font-size: 13px;
@@ -57,12 +56,4 @@ margin-right: px;
 margin-bottom: 2px;
 margin-left: px;
 border-top: 1px dashed #ffffff;
-}
-
-.index {
-font-size: 10px;
-font-family: Verdana, Chicago,ＭＳ ゴシック;
-background-color: #000000;
-margin-top: 100px;
-margin-left: 75px;
 }
