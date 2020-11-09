@@ -34,9 +34,9 @@ margin: 0 auto;
 header {
 font-size: 15px;
 font-weight: bold;
-margin-bottom: 1em;
+margin-bottom: 0.5em;
 border-bottom: solid 1px #777;
-padding-bottom: 0.15em;
+padding-bottom: 0em;
 }
 
 footer {
