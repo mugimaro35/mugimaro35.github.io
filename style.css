@@ -96,6 +96,10 @@ td.price {
 width: 9em;	
 }
 
+tr.general{
+width:360px;
+}
+
 td.general {
 line-height: 0.92em;
 }
