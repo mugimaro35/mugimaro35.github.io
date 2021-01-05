@@ -89,13 +89,15 @@ td.price {
 width: 9em;	
 }
 
-tr.general{
-width:360px;
+td.general{
+vertical-align: top;
 }
 
-td.general {
-line-height: 0.92em;
+tr.general{
+width: 360px;
+vertical-align: top;
 }
+
 
 /* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
 
