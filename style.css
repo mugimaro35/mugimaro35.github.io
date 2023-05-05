@@ -24,6 +24,11 @@ img.margin {
 margin: 1px;
 }
 
+img.banner{
+max-width: 100%;
+height: auto;
+}
+
 /* 右クリック無効
 img {
 pointer-events: none;
