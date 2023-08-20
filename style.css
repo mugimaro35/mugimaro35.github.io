@@ -86,28 +86,7 @@ max-width: 650px;
 margin: auto;
 }
 
-header.general {
-position: absolute;
-z-index: 999;
-width: 100%;
-top: 0px;
-left: 0px;
-box-sizing: border-box;
-background-color: #eee;
-padding-top: 54px;
-padding-bottom: 0.5em;
-}
-
-header.fixed {
-position: fixed;
-z-index: 999;
-width: 100%;
-top: 0px;
-left: 0px;
-box-sizing: border-box;
-background-color: #eee;
-padding-top: 54px;
-padding-bottom: 0.5em;
+header {
 }
 
 footer {
@@ -168,14 +147,16 @@ margin: 0.5em 1.5px;
 
 /* ヘッダー文字の左右分け */
 .left {
-  display: inline-block;
+display: inline-block;
+font-size: 16px;
+font-weight: bold;
 }
 
 .right {
-  display: inline-block;
+display: inline-block;
 }
 
 .menutext {
-  display: flex;
-  justify-content: space-between;
+display: flex;
+justify-content: space-between;
 }
