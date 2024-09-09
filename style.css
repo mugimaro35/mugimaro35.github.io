@@ -20,6 +20,11 @@ touch-callout:none;
 user-select:none;
 }
 
+img.640 {
+max-width: 100%;
+height: auto;
+}
+
 img.margin {
 margin: 1px;
 }
