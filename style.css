@@ -31,8 +31,8 @@ height: auto;
 
 @media screen and (max-width: 768px) {
 img.640px {
-width: 320px;
-}
+ width: 320px;
+ }
 }
 
 /* 右クリック無効
