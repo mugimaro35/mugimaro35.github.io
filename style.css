@@ -23,10 +23,10 @@ height: auto;		/* アス比維持 */
 }
 
 @media screen and (max-width: 360px) {
-    img {
-        width: auto;		/* 画面幅が360px以下の場合、画像の幅は自動調整 */
-        max-width: 100%;	/* 親要素の幅を超えない */
-    }
+img {
+width: auto;		/* 画面幅が360px以下の場合、画像の幅は自動調整 */
+max-width: 100%;	/* 親要素の幅を超えない */
+}
 }
 
 img.margin {
