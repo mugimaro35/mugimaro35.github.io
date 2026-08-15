@@ -6,7 +6,9 @@ const images = [
     "file/sandbox/ffslot/image01.png",
     "file/sandbox/ffslot/image02.png",
     "file/sandbox/ffslot/image03.png",
-    "file/sandbox/ffslot/image04.png"
+    "file/sandbox/ffslot/image04.png",
+    "file/sandbox/ffslot/image05.png",
+    "file/sandbox/ffslot/image06.png"
 ];
 
 const reels = [
@@ -24,7 +26,7 @@ const SYMBOL_HEIGHT = 150;
    ゲーム設定
 ========================= */
 
-const START_CREDIT = 30;
+const START_CREDIT = 50;
 const BET = 10;
 const JACKPOT = 100;
 const TWO_MATCH = 20;
@@ -53,9 +55,7 @@ const highScoreText =
 function createReel(reel) {
     reel.innerHTML = "";
 
-    /*
-     * リールを40個並べる
-     */
+    /* * リールを40個並べる */
 
     for (let i = 0; i < 40; i++) {
         const symbol =
@@ -86,7 +86,6 @@ reels.forEach(createReel);
 ========================= */
 
 function randomSymbol() {
-
     return Math.floor(
         Math.random() *
         images.length
@@ -151,10 +150,8 @@ async function spin() {
 
 
     if (credit < BET) {
-
         resultText.textContent =
             "ギルが足りない！貧乏人！";
-
         return;
     }
 
@@ -167,9 +164,7 @@ async function spin() {
     /* * リールを初期位置へ戻す */
 
     reels.forEach(reel => {
-
         reel.style.transition = "none";
-
         reel.style.transform =
             "translateY(0)";
     });
@@ -204,16 +199,13 @@ async function spin() {
             1700
         );
 
-
     judge([
         result0,
         result1,
         result2
     ]);
 
-
     spinning = false;
-
     spinButton.disabled = false;
 }
 

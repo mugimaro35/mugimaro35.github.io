@@ -77,9 +77,9 @@ body {
     animation: rainbowBorder 2s linear infinite;
 
     box-shadow:
-        0 0 10px #fff,
-        0 0 25px #ff00ff,
-        0 0 50px #00ffff,
+        0 0 10px red,
+        0 0 25px orange,
+        0 0 50px yellow,
         0 15px 40px #000;
     text-align: center;
 }
