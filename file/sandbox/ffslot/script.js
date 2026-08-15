@@ -35,19 +35,33 @@ const SYMBOL_HEIGHT = 150;
    ゲーム設定
 ========================= */
 
-const START_CREDIT = 100;
+const START_CREDIT = 30;
 const BET = 10;
 const JACKPOT = 100;
 const TWO_MATCH = 20;
+
 let credit = START_CREDIT;
 let spinning = false;
+
+/* =========================
+   保存データ
+========================= */
+
+let highScore =
+    Number(localStorage.getItem("slotHighScore")) || START_CREDIT;
+
+/* =========================
+   DOM
+========================= */
+
+const highScoreText =
+    document.getElementById("highScore");
 
 /* =========================
    リール生成
 ========================= */
 
 function createReel(reel) {
-
     reel.innerHTML = "";
 
     /*
@@ -55,12 +69,9 @@ function createReel(reel) {
      */
 
     for (let i = 0; i < 40; i++) {
-
         const symbol =
             document.createElement("div");
-
         symbol.className = "symbol";
-
 
         const img =
             document.createElement("img");
@@ -70,9 +81,7 @@ function createReel(reel) {
                 i % images.length
             ];
 
-
         symbol.appendChild(img);
-
         reel.appendChild(symbol);
     }
 }
@@ -106,32 +115,23 @@ function spinReel(
     reel,
     duration
 ) {
-
     return new Promise(resolve => {
-
         const finalSymbol =
             randomSymbol();
 
 
-        /*
-         * 停止位置
-         */
-
+        /* * 停止位置 */
         const targetIndex =
             30 +
             finalSymbol;
 
 
-        /*
-         * 上方向へ移動
-         */
-
+        /* * 上方向へ移動 */
         const targetPosition =
             -(
                 targetIndex *
                 SYMBOL_HEIGHT
             );
-
 
         reel.style.transition =
             `transform ${duration}ms
@@ -142,22 +142,16 @@ function spinReel(
                  1
              )`;
 
-
         reel.style.transform =
             `translateY(
                 ${targetPosition}px
             )`;
 
-
         setTimeout(() => {
-
             resolve(finalSymbol);
-
         }, duration);
-
     });
 }
-
 
 /* =========================
    SPIN
@@ -178,23 +172,13 @@ async function spin() {
         return;
     }
 
-
     spinning = true;
-
     spinButton.disabled = true;
-
-
     credit -= BET;
-
     updateCredit();
-
-
     resultText.textContent = "";
 
-
-    /*
-     * リールを初期位置へ戻す
-     */
+    /* * リールを初期位置へ戻す */
 
     reels.forEach(reel => {
 
@@ -208,9 +192,7 @@ async function spin() {
     await sleep(50);
 
 
-    /*
-     * 左
-     */
+    /* * 左 */
 
     const result0 =
         await spinReel(
@@ -219,9 +201,7 @@ async function spin() {
         );
 
 
-    /*
-     * 中央
-     */
+    /* * 中央 */
 
     const result1 =
         await spinReel(
@@ -230,9 +210,7 @@ async function spin() {
         );
 
 
-    /*
-     * 右
-     */
+    /* * 右 */
 
     const result2 =
         await spinReel(
@@ -259,74 +237,63 @@ async function spin() {
 ========================= */
 
 function judge(results) {
-
     const a = results[0];
-
     const b = results[1];
-
     const c = results[2];
 
-
-    /*
-     * 3つ揃い
-     */
-
+    /* * 3つ揃い */
     if (
         a === b &&
         b === c
     ) {
 
         credit += JACKPOT;
-
-
         resultText.textContent =
             "うれしい！！！！ +100";
     }
 
 
-    /*
-     * 2つ揃い
-     */
-
+    /* * 2つ揃い */
     else if (
         a === b ||
         b === c ||
         a === c
     ) {
-
         credit += TWO_MATCH;
-
-
         resultText.textContent =
             "あたり！ +20";
     }
 
 
-    /*
-     * ハズレ
-     */
-
+    /* * ハズレ */
     else {
-
         resultText.textContent =
             "はずれ！";
     }
 
-
     updateCredit();
 }
 
-
 /* =========================
-   CREDIT更新
+   ギル更新
 ========================= */
 
 function updateCredit() {
+    creditText.textContent = credit;
 
-    creditText.textContent =
-        credit;
+    if (credit > highScore) {
+        highScore = credit;
+
+        localStorage.setItem(
+            "slotHighScore",
+            highScore
+        );
+    }
+
+    highScoreText.textContent = highScore;
 }
 
+updateCredit();
 
 /* =========================
    RESET
