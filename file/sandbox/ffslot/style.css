@@ -9,6 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family:
+        HG創英角ﾎﾟｯﾌﾟ体,
         Arial,
         "Noto Sans JP",
         sans-serif;
@@ -31,40 +32,15 @@ body {
     color: red;
 }
 
-.copyright {
-    font-size: 11px;
-    color: orange;
-}
-
-#clearScore {
-    position: relative;
-    z-index: 100;
-    cursor: pointer;
-    font-size: 11px;
-    color: red;
-}
-
-#clearScore:hover {
-    color: #aa0000;
-}
 
 /* =========================
    背景虹色アニメーション
 ========================= */
 
 @keyframes rainbowBackground {
-
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 
@@ -73,7 +49,6 @@ body {
 ========================= */
 
 .machine {
-
     width: 520px;
     padding: 30px;
     border-radius: 25px;
@@ -111,7 +86,7 @@ body {
 
 
 /* =========================
-   虹色枠アニメーション
+   虹色の外枠アニメーション
 ========================= */
 
 @keyframes rainbowBorder {
@@ -165,14 +140,33 @@ h1 {
 
 
 @keyframes rainbowText {
+    0% { background-position: 0%; }
+    100% { background-position: 300%; }
+}
 
-    0% {
-        background-position: 0%;
-    }
 
-    100% {
-        background-position: 300%;
-    }
+/* =========================
+   下の文字
+========================= */
+.copyright {
+    font-size: 11px;
+    color: orange;
+    font-family:
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
+}
+
+#clearScore {
+    position: relative;
+    z-index: 100;
+    cursor: pointer;
+    font-size: 11px;
+    color: red;
+}
+
+#clearScore:hover {
+    color: #aa0000;
 }
 
 
@@ -194,17 +188,23 @@ h1 {
     overflow: hidden;
     position: relative;
     background: white;
-    border: 5px solid #111;
+    border: 5px solid transparent;
     border-radius: 8px;
-    box-shadow:
-        0 0 10px white,
-        0 0 20px orange;
+    box-shadow: 0 0 10px orange;
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(
+            90deg,
+            red,
+            orange,
+            yellow,
+            lime,
+            cyan,
+            blue,
+            violet,
+            red
+        ) border-box;
 }
-
-
-/* =========================
-   リール
-========================= */
 
 .reel {
     position: absolute;
@@ -242,9 +242,7 @@ h1 {
     font-size: 24px;
     margin-bottom: 15px;
     color: #ff0000; 
-    text-shadow:
-        0 0 5px white,
-        0 0 10px orange;
+    text-shadow: 0 0 10px orange;
 }
 
 
@@ -266,6 +264,11 @@ button {
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
+    font-family:
+        HG創英角ﾎﾟｯﾌﾟ体,
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
 }
 
 
@@ -290,9 +293,9 @@ button {
     background-size: 400%;
     animation: rainbowButton 1.5s linear infinite;
     box-shadow:
-        0 0 10px white,
-        0 0 20px red,
-        0 0 30px cyan;
+        0 0 10px red,
+        0 0 20px orange,
+        0 0 30px yellow;
 }
 
 
@@ -314,7 +317,6 @@ button {
 ========================= */
 
 #reset {
-
     color: white;
     background:
         linear-gradient(
@@ -330,34 +332,23 @@ button {
         );
 
     background-size: 400%;
-    animation:
-        rainbowButton 1.5s linear infinite;
+    animation: rainbowButton 1.5s linear infinite;
     box-shadow:
-        0 0 10px white,
-        0 0 20px blue,
-        0 0 30px violet;
-
+        0 0 10px red,
+        0 0 20px orange,
+        0 0 30px yellow;
 }
 
 
 #reset:hover {
-
     transform:
         scale(1.08);
-
 }
 
 
 @keyframes rainbowButton {
-
-    0% {
-        background-position: 0%;
-    }
-
-    100% {
-        background-position: 400%;
-    }
-
+    0% { background-position: 0%; }
+    100% { background-position: 400%; }
 }
 
 
@@ -366,18 +357,9 @@ button {
 ========================= */
 
 #result {
-
     min-height: 35px;
-
     margin-top: 15px;
-
     font-size: 24px;
-
     font-weight: bold;
-
-    text-shadow:
-        0 0 5px white,
-        0 0 10px yellow,
-        0 0 20px magenta;
-
+    text-shadow: 0 0 10px orange;
 }
