@@ -7,8 +7,7 @@ const images = [
     "file/sandbox/ffslot/image02.png",
     "file/sandbox/ffslot/image03.png",
     "file/sandbox/ffslot/image04.png",
-    "file/sandbox/ffslot/image05.png",
-    "file/sandbox/ffslot/image06.png"
+    "file/sandbox/ffslot/image05.png"
 ];
 
 const reels = [
