@@ -3,9 +3,9 @@
 ========================= */
 
 const images = [
-    "image01.png",
-    "image02.png",
-    "image03.png"
+    "file/sandbox/ffslot/image01.png",
+    "file/sandbox/ffslot/image02.png",
+    "file/sandbox/ffslot/image03.png"
 ];
 
 
@@ -36,18 +36,11 @@ const SYMBOL_HEIGHT = 150;
 ========================= */
 
 const START_CREDIT = 100;
-
 const BET = 10;
-
 const JACKPOT = 100;
-
 const TWO_MATCH = 20;
-
-
 let credit = START_CREDIT;
-
 let spinning = false;
-
 
 /* =========================
    リール生成
