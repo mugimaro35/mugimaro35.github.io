@@ -23,10 +23,7 @@ let playerId =
     localStorage.getItem("slotPlayerId");
 
 if (!playerId) {
-
-    playerId =
-        crypto.randomUUID();
-
+    playerId = crypto.randomUUID();
     localStorage.setItem(
         "slotPlayerId",
         playerId
@@ -62,10 +59,10 @@ const SYMBOL_HEIGHT = 150;
    ゲーム設定
 ========================= */
 
-const START_CREDIT = 50;
+const START_CREDIT = 100;
 const BET = 10;
 const JACKPOT = 100;
-const TWO_MATCH = 20;
+const TWO_MATCH = 30;
 
 let credit = START_CREDIT;
 let spinning = false;
@@ -356,6 +353,7 @@ spinButton.addEventListener(
     "click",
     spin
 );
+
 
 /* =========================
    ハイスコア削除
