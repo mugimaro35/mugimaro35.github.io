@@ -337,15 +337,9 @@ document
     .addEventListener(
         "click",
         () => {
-
-            localStorage.removeItem(
-                "slotHighScore"
-            );
-
+            localStorage.removeItem("slotHighScore");
             highScore = START_CREDIT;
-
-            updateCredit();
-
+            highScoreText.textContent = highScore;
         }
     );
 

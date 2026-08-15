@@ -37,6 +37,8 @@ body {
 }
 
 #clearScore {
+    position: relative;
+    z-index: 100;
     cursor: pointer;
     font-size: 11px;
     color: red;
