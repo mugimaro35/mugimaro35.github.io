@@ -272,7 +272,7 @@ function judge(results) {
     ) {
         credit += TWO_MATCH;
         resultText.textContent =
-            "あたり！ +20";
+            "あたり！ +30";
     }
 
 
