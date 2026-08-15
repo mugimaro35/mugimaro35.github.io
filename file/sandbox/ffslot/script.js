@@ -8,28 +8,16 @@ const images = [
     "file/sandbox/ffslot/image03.png"
 ];
 
-
 const reels = [
     document.getElementById("reel0"),
     document.getElementById("reel1"),
     document.getElementById("reel2")
 ];
 
-
-const creditText =
-    document.getElementById("credit");
-
-
-const resultText =
-    document.getElementById("result");
-
-
-const spinButton =
-    document.getElementById("spin");
-
-
+const creditText = document.getElementById("credit");
+const resultText = document.getElementById("result");
+const spinButton = document.getElementById("spin");
 const SYMBOL_HEIGHT = 150;
-
 
 /* =========================
    ゲーム設定
@@ -86,13 +74,11 @@ function createReel(reel) {
     }
 }
 
-
 /* =========================
    初期化
 ========================= */
 
 reels.forEach(createReel);
-
 
 /* =========================
    ランダム絵柄
@@ -105,7 +91,6 @@ function randomSymbol() {
         images.length
     );
 }
-
 
 /* =========================
    リールを回す
@@ -343,6 +328,26 @@ spinButton.addEventListener(
     spin
 );
 
+/* =========================
+   ハイスコア削除
+========================= */
+
+document
+    .getElementById("clearScore")
+    .addEventListener(
+        "click",
+        () => {
+
+            localStorage.removeItem(
+                "slotHighScore"
+            );
+
+            highScore = START_CREDIT;
+
+            updateCredit();
+
+        }
+    );
 
 /* =========================
    sleep

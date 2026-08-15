@@ -36,6 +36,16 @@ body {
     color: orange;
 }
 
+#clearScore {
+    cursor: pointer;
+    font-size: 11px;
+    color: red;
+}
+
+#clearScore:hover {
+    color: #aa0000;
+}
+
 /* =========================
    背景虹色アニメーション
 ========================= */
