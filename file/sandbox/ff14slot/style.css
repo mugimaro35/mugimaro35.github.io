@@ -1,0 +1,371 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff0000,
+            #ff8c00,
+            #ffff00,
+            #00ff00,
+            #00ffff,
+            #0080ff,
+            #8000ff,
+            #ff00ff
+        );
+
+    background-size: 400% 400%;
+    animation: rainbowBackground 8s linear infinite;
+    color: red;
+}
+
+.copyright {
+    font-size: 11px;
+    color: orange;
+}
+
+/* =========================
+   背景虹色アニメーション
+========================= */
+
+@keyframes rainbowBackground {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* =========================
+   スロット本体
+========================= */
+
+.machine {
+
+    width: 520px;
+    padding: 30px;
+    border-radius: 25px;
+
+    /* 虹色の外枠 */
+    border: 8px solid transparent;
+
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(
+            90deg,
+            red,
+            orange,
+            yellow,
+            lime,
+            cyan,
+            blue,
+            violet,
+            red
+        ) border-box;
+
+    background-size:
+        auto,
+        400% 100%;
+
+    animation: rainbowBorder 2s linear infinite;
+
+    box-shadow:
+        0 0 10px #fff,
+        0 0 25px #ff00ff,
+        0 0 50px #00ffff,
+        0 15px 40px #000;
+    text-align: center;
+}
+
+
+/* =========================
+   虹色枠アニメーション
+========================= */
+
+@keyframes rainbowBorder {
+
+    0% {
+        background-position:
+            0 0,
+            0% 50%;
+    }
+
+    100% {
+        background-position:
+            0 0,
+            400% 50%;
+    }
+}
+
+
+/* =========================
+   タイトル
+========================= */
+
+h1 {
+    margin: 0 0 25px;
+    font-size: 42px;
+
+    /* 虹色文字 */
+    background:
+        linear-gradient(
+            90deg,
+            red,
+            orange,
+            yellow,
+            lime,
+            cyan,
+            blue,
+            violet,
+            red
+        );
+
+    background-size: 300%;
+    animation: rainbowText 2s linear infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    /* 発光 */
+    filter:
+        drop-shadow(0 0 5px white);
+}
+
+
+@keyframes rainbowText {
+
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 300%;
+    }
+}
+
+
+/* =========================
+   リール
+========================= */
+
+.reels {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+
+.reel-window {
+    width: 140px;
+    height: 160px;
+    overflow: hidden;
+    position: relative;
+    background: white;
+    border: 5px solid #111;
+    border-radius: 8px;
+    box-shadow:
+        0 0 10px white,
+        0 0 20px orange;
+}
+
+
+/* =========================
+   リール
+========================= */
+
+.reel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+/* =========================
+   絵柄
+========================= */
+
+.symbol {
+    width: 130px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.symbol img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+
+/* =========================
+   ギル
+========================= */
+
+.info {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #ff0000; 
+    text-shadow:
+        0 0 5px white,
+        0 0 10px orange;
+}
+
+
+/* =========================
+   ボタン
+========================= */
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button {
+    width: 140px;
+    height: 55px;
+    border: none;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =========================
+   SPIN
+========================= */
+
+#spin {
+    color: white;
+    background:
+        linear-gradient(
+            90deg,
+            red,
+            orange,
+            yellow,
+            lime,
+            cyan,
+            blue,
+            violet
+        );
+
+    background-size: 400%;
+    animation: rainbowButton 1.5s linear infinite;
+    box-shadow:
+        0 0 10px white,
+        0 0 20px red,
+        0 0 30px cyan;
+}
+
+
+#spin:hover {
+    transform:
+        scale(1.08);
+}
+
+
+#spin:disabled {
+    background: orange;
+    animation: none;
+    cursor: default;
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+#reset {
+
+    color: white;
+    background:
+        linear-gradient(
+            90deg,
+            blue,
+            violet,
+            red,
+            orange,
+            yellow,
+            lime,
+            cyan,
+            blue
+        );
+
+    background-size: 400%;
+    animation:
+        rainbowButton 1.5s linear infinite;
+    box-shadow:
+        0 0 10px white,
+        0 0 20px blue,
+        0 0 30px violet;
+
+}
+
+
+#reset:hover {
+
+    transform:
+        scale(1.08);
+
+}
+
+
+@keyframes rainbowButton {
+
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 400%;
+    }
+
+}
+
+
+/* =========================
+   結果
+========================= */
+
+#result {
+
+    min-height: 35px;
+
+    margin-top: 15px;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 5px white,
+        0 0 10px yellow,
+        0 0 20px magenta;
+
+}
