@@ -778,12 +778,27 @@ body.reachFlash::after {
 
 
 /* =========================
-   サウンドボタン
+   音量コントロール
 ========================= */
-#soundToggle {
+#volumeControl {
     position: fixed;
     top: 15px;
     right: 15px;
+
+    width: 45px;
+    height: 160px;
+
+    z-index: 10000;
+}
+
+
+/* =========================
+   サウンドボタン
+========================= */
+#soundToggle {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 45px;
     height: 45px;
     padding: 0;
@@ -793,9 +808,7 @@ body.reachFlash::after {
     color: black;
     font-size: 22px;
     cursor: pointer;
-    z-index: 10000;
-    box-shadow:
-        0 0 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     font-family:
         Arial,
         sans-serif;
@@ -803,6 +816,31 @@ body.reachFlash::after {
 
 #soundToggle:hover {
     transform: scale(1.1);
+}
+
+
+/* =========================
+   音量バー
+========================= */
+#volumeSlider {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    width: 45px;
+    padding: 0;
+    height: 100px;
+    writing-mode: vertical-lr;
+    direction: rtl;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+
+/* コントロール全体にカーソルがある間表示 */
+#volumeControl:hover #volumeSlider {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 

@@ -73,26 +73,8 @@ const reachkimariSound = new Audio("file/sandbox/ffslot/snd/reach_kimari.mp3");
 const winkimariSound = new Audio("file/sandbox/ffslot/snd/win_kimari.mp3");
 const losekimariSound = new Audio("file/sandbox/ffslot/snd/lose_kimari.mp3");
 
-
 const reachEffect = document.getElementById("reachEffect");
-
 let soundEnabled = true;
-
-
-/* 再生/停止の関数 */
-function playSound(sound) {
-    if (!soundEnabled) {
-        return;
-    }
-
-    sound.currentTime = 0;
-    sound.play();
-}
-
-function stopAudio(sound) {
-    sound.pause();
-    sound.currentTime = 0;
-}
 
 
 /* 特殊サウンド */
@@ -107,6 +89,35 @@ const SPECIAL_SYMBOLS = {
         lose: losekimariSound
     }
 };
+
+
+/* 音量バー */
+let masterVolume = 1.0;
+const volumeSlider = document.getElementById("volumeSlider");
+
+volumeSlider.addEventListener(
+    "input",
+    () => {
+        masterVolume = volumeSlider.value / 100;
+    }
+);
+
+
+/* 再生/停止の関数 */
+function playSound(sound) {
+    if (!soundEnabled) {
+        return;
+    }
+
+    sound.volume = masterVolume;
+    sound.currentTime = 0;
+    sound.play();
+}
+
+function stopAudio(sound) {
+    sound.pause();
+    sound.currentTime = 0;
+}
 
 
 /* =========================
