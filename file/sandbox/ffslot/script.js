@@ -302,7 +302,7 @@ async function spin() {
     const result2 =
         await spinReel(
             reels[2],
-            reach ? 3400 : 1700
+            reach ? 5000 : 1700
         );
 
         stopAudio(spinSound);
