@@ -1,11 +1,8 @@
 /* =========================
    Supabase
 ========================= */
-const SUPABASE_URL =
-    "https://cxdctttswqvashlirvca.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_lKf-Qu0VwI9kwzW0gIshvA_FcZaJgJs";
+const SUPABASE_URL = "https://cxdctttswqvashlirvca.supabase.co";
+const SUPABASE_KEY = "sb_publishable_lKf-Qu0VwI9kwzW0gIshvA_FcZaJgJs";
 
 const supabaseClient =
     supabase.createClient(
@@ -87,6 +84,10 @@ const SPECIAL_SYMBOLS = {
         reach: reachkimariSound,
         win: winkimariSound,
         lose: losekimariSound
+    },
+
+    6: {
+        lose: losewakkaSound
     }
 };
 
@@ -205,13 +206,13 @@ function spinReel(
             randomSymbol();
 
 
-        /* * 停止位置 */
+        /* 停止位置 */
         const targetIndex =
             (images.length * (REEL_COUNT - 1)) +
             finalSymbol;
 
 
-        /* * 上方向へ移動 */
+        /* 上方向へ移動 */
         const targetPosition =
             -(
                 targetIndex *
