@@ -831,6 +831,7 @@ body.reachFlash::after {
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     font-family:
+        HG創英角ﾎﾟｯﾌﾟ体,
         Arial,
         sans-serif;
 }
@@ -882,8 +883,7 @@ body.reachFlash::after {
     font-size: 22px;
     cursor: pointer;
     z-index: 10000;
-    box-shadow:　0 0 10px rgba(0, 0, 0, 0.4);
-
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     font-family:
         HG創英角ﾎﾟｯﾌﾟ体,
         Arial,
