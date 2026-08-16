@@ -31,13 +31,7 @@ if (!playerId) {
 ========================= */
 const images = [
     "file/sandbox/ffslot/img/01.png",
-    "file/sandbox/ffslot/img/02.png",
-    "file/sandbox/ffslot/img/03.png",
-    "file/sandbox/ffslot/img/04.png",
-    "file/sandbox/ffslot/img/05.png",
-    "file/sandbox/ffslot/img/06.png",
-    "file/sandbox/ffslot/img/07.png",
-    "file/sandbox/ffslot/img/08.png"
+    "file/sandbox/ffslot/img/02.png"
 ];
 
 const REEL_COUNT = 5;
@@ -436,10 +430,8 @@ function judge(results) {
         SPECIAL_SYMBOLS[a]?.lose
     ) {
 
-        playSound(
-            SPECIAL_SYMBOLS[a].lose
-        );
-
+        credit += TWO_MATCH;
+        playSound( SPECIAL_SYMBOLS[a].lose );
         resultText.textContent = "あたり！ +30";
     }
 
