@@ -80,6 +80,10 @@ const SPECIAL_SYMBOLS = {
         lose: losewakkaSound
     },
 
+    1: {
+        lose: loseyunaSound
+    },
+
     3: {
         reach: reachkimariSound,
         win: winkimariSound,
