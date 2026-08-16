@@ -38,7 +38,6 @@ const images = [
     "file/sandbox/ffslot/img/06.png",
     "file/sandbox/ffslot/img/07.png",
     "file/sandbox/ffslot/img/08.png"
-    "file/sandbox/ffslot/img/02.png"
 ];
 
 const REEL_COUNT = 5;
