@@ -3,7 +3,7 @@
 }
 
 body {
-    margin: 0;
+    margin: 3% 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -37,7 +37,6 @@ body {
 /* =========================
    背景虹色アニメーション
 ========================= */
-
 @keyframes rainbowBackground {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -48,7 +47,6 @@ body {
 /* =========================
    スロット本体
 ========================= */
-
 .machine {
     width: 520px;
     padding: 30px;
@@ -89,7 +87,6 @@ body {
 /* =========================
    虹色の外枠アニメーション
 ========================= */
-
 @keyframes rainbowBorder {
 
     0% {
@@ -109,7 +106,6 @@ body {
 /* =========================
    タイトル
 ========================= */
-
 h1 {
     margin: 0 0 25px;
     font-size: 42px;
@@ -356,7 +352,6 @@ button {
 /* =========================
    結果
 ========================= */
-
 #result {
     min-height: 35px;
     margin-top: 15px;
@@ -367,9 +362,133 @@ button {
 
 
 /* =========================
-   SCORE RANKING
+   リーチ演出
 ========================= */
+#reachEffect {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: max-content;
 
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+
+/* =========================
+   リーチ文字
+========================= */
+#reachEffect span {
+    display: block;
+    font-size: 90px;
+    font-weight: bold;
+
+    /* 虹色文字 */
+    background:
+        linear-gradient(
+            90deg,
+            red,
+            orange,
+            yellow,
+            lime,
+            cyan,
+            blue,
+            violet,
+            red
+        );
+
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    /* 白い縁取り */
+    -webkit-text-stroke: 5px white;
+
+    /* 発光 */
+    filter:
+        drop-shadow(0 0 10px red)
+        drop-shadow(0 0 20px orange)
+        drop-shadow(0 0 40px yellow)
+        drop-shadow(0 0 70px white);
+    animation: reachRainbow 0.5s linear infinite;
+}
+
+
+/* =========================
+   リーチ出現
+========================= */
+#reachEffect.active {
+    animation: reachAppear 1.5s ease-out forwards;
+}
+
+
+/* =========================
+   虹色だけ動かす
+========================= */
+@keyframes reachRainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+
+/* =========================
+   位置・大きさだけ動かす
+========================= */
+@keyframes reachAppear {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+    }
+
+    25% {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(1.5);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(1.2);
+    }
+}
+
+
+/* =========================
+   リーチ画面フラッシュ
+========================= */
+body.reachFlash {
+    animation:
+        reachFlash 0.15s linear 6;
+}
+
+@keyframes reachFlash {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(2.5); }
+    100% { filter: brightness(1); }
+}
+
+
+/* =========================
+   すごいひとたち
+========================= */
 .score-board {
     width: 520px;
     margin: 25px auto 0;
@@ -411,7 +530,6 @@ button {
 /* =========================
    ランキングタイトル
 ========================= */
-
 .score-board h2 {
     margin: 0 0 20px;
     font-size: 32px;
@@ -447,7 +565,6 @@ button {
 /* =========================
    名前入力
 ========================= */
-
 .ranking-submit {
     display: flex;
     justify-content: center;
@@ -500,7 +617,6 @@ button {
 /* =========================
    スコア登録ボタン
 ========================= */
-
 #submitScore {
     width: 130px;
     height: 45px;
@@ -537,7 +653,6 @@ button {
 /* =========================
    ランキング
 ========================= */
-
 #ranking {
     width: 100%;
     margin-top: 10px;
@@ -552,7 +667,6 @@ button {
 /* =========================
    ランキング1行
 ========================= */
-
 #ranking div {
     display: flex;
     align-items: center;
@@ -565,7 +679,6 @@ button {
 /* =========================
    ランキング順位カラー
 ========================= */
-
 .rank-1 { color: red !important; }
 .rank-2 { color: orange !important; }
 .rank-3 { color: yellow !important; }
@@ -578,4 +691,42 @@ button {
 .rank-9,
 .rank-10 {
     color: black !important;
+}
+
+
+/* =========================
+   サウンドボタン
+========================= */
+#soundToggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+
+    width: 45px;
+    height: 45px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: white;
+    color: black;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    z-index: 10000;
+
+    box-shadow:
+        0 0 10px rgba(0, 0, 0, 0.4);
+
+    font-family:
+        Arial,
+        sans-serif;
+}
+
+#soundToggle:hover {
+    transform: scale(1.1);
 }

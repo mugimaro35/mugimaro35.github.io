@@ -34,14 +34,13 @@ if (!playerId) {
 /* =========================
    設定
 ========================= */
-
 const images = [
-    "file/sandbox/ffslot/image01.png",
-    "file/sandbox/ffslot/image02.png",
-    "file/sandbox/ffslot/image03.png",
-    "file/sandbox/ffslot/image04.png",
-    "file/sandbox/ffslot/image05.png",
-    "file/sandbox/ffslot/image06.png"
+    "file/sandbox/ffslot/img/01.png",
+    "file/sandbox/ffslot/img/02.png",
+    "file/sandbox/ffslot/img/03.png",
+    "file/sandbox/ffslot/img/04.png",
+    "file/sandbox/ffslot/img/05.png",
+    "file/sandbox/ffslot/img/06.png"
 ];
 
 const reels = [
@@ -55,10 +54,21 @@ const resultText = document.getElementById("result");
 const spinButton = document.getElementById("spin");
 const SYMBOL_HEIGHT = 150;
 
+
+/* =========================
+   サウンド設定
+========================= */
+const winSound = new Audio("file/sandbox/ffslot/snd/win.mp3");
+const loseSound = new Audio("file/sandbox/ffslot/snd/lose.mp3");
+const stopSound = new Audio("file/sandbox/ffslot/snd/stop.mp3");
+const reachSound = new Audio("file/sandbox/ffslot/snd/reach.mp3");
+const reachEffect = document.getElementById("reachEffect");
+let soundEnabled = true;
+
+
 /* =========================
    ゲーム設定
 ========================= */
-
 const START_CREDIT = 100;
 const BET = 10;
 const JACKPOT = 100;
@@ -67,24 +77,24 @@ const TWO_MATCH = 30;
 let credit = START_CREDIT;
 let spinning = false;
 
+
 /* =========================
    保存データ
 ========================= */
-
 let highScore =
     Number(localStorage.getItem("slotHighScore")) || START_CREDIT;
+
 
 /* =========================
    DOM
 ========================= */
-
 const highScoreText =
     document.getElementById("highScore");
+
 
 /* =========================
    リール生成
 ========================= */
-
 function createReel(reel) {
     reel.innerHTML = "";
 
@@ -108,16 +118,16 @@ function createReel(reel) {
     }
 }
 
+
 /* =========================
    初期化
 ========================= */
-
 reels.forEach(createReel);
+
 
 /* =========================
    ランダム絵柄
 ========================= */
-
 function randomSymbol() {
     return Math.floor(
         Math.random() *
@@ -125,10 +135,10 @@ function randomSymbol() {
     );
 }
 
+
 /* =========================
    リールを回す
 ========================= */
-
 function spinReel(
     reel,
     duration
@@ -174,7 +184,6 @@ function spinReel(
 /* =========================
    SPIN
 ========================= */
-
 async function spin() {
 
     if (spinning) {
@@ -194,8 +203,8 @@ async function spin() {
     updateCredit();
     resultText.textContent = "";
 
-    /* * リールを初期位置へ戻す */
 
+    /* リールを初期位置へ戻す */
     reels.forEach(reel => {
         reel.style.transition = "none";
         reel.style.transform =
@@ -206,16 +215,20 @@ async function spin() {
     await sleep(50);
 
 
-    /* * 左 */
-
+    /* 左 */
     const result0 =
         await spinReel(
             reels[0],
             900
         );
 
+    if (soundEnabled) {
+        stopSound.currentTime = 0;
+        stopSound.play();
+    }
 
-    /* * 中央 */
+
+    /* 中央 */
 
     const result1 =
         await spinReel(
@@ -223,15 +236,58 @@ async function spin() {
             1300
         );
 
+    if (soundEnabled) {
+        stopSound.currentTime = 0;
+        stopSound.play();
+    }
 
-    /* * 右 */
 
+/* =========================
+   リーチ演出
+========================= */
+    const reach =
+        result0 === result1;
+
+    if (reach) {
+        /* リーチ音 */
+        if (soundEnabled) {
+            reachSound.currentTime = 0;
+            reachSound.play();
+        }
+
+        /* REACH!!表示 */
+        reachEffect.classList.remove("active");
+        void reachEffect.offsetWidth;
+        reachEffect.classList.add("active");
+
+        /* 画面フラッシュ */
+        document.body.classList.remove("reachFlash");
+        void document.body.offsetWidth;
+        document.body.classList.add("reachFlash");
+        document.body.addEventListener(
+            "animationend",
+            () => {
+                document.body.classList.remove("reachFlash");
+            },
+            { once: true }
+        );
+    }
+
+
+    /* 右 */
     const result2 =
         await spinReel(
             reels[2],
-            1700
+            reach ? 3000 : 1700
         );
 
+    if (soundEnabled) {
+        stopSound.currentTime = 0;
+        stopSound.play();
+    }
+
+
+    /* 結果判定 */
     judge([
         result0,
         result1,
@@ -252,43 +308,52 @@ function judge(results) {
     const b = results[1];
     const c = results[2];
 
-    /* * 3つ揃い */
+    /* 3つ揃い */
     if (
         a === b &&
         b === c
     ) {
 
         credit += JACKPOT;
-        resultText.textContent =
-            "うれしい！！！！ +100";
+        if (soundEnabled) {
+            winSound.currentTime = 0;
+            winSound.play();
+        }
+        resultText.textContent = "うれしい！！！！ +100";
     }
 
 
-    /* * 2つ揃い */
+    /* 2つ揃い */
     else if (
         a === b ||
         b === c ||
         a === c
     ) {
         credit += TWO_MATCH;
-        resultText.textContent =
-            "あたり！ +30";
+        if (soundEnabled) {
+            winSound.currentTime = 0;
+            winSound.play();
+        }
+        resultText.textContent = "あたり！ +30";
     }
 
 
-    /* * ハズレ */
+    /* はずれ */
     else {
-        resultText.textContent =
-            "はずれ！";
+        if (soundEnabled) {
+            loseSound.currentTime = 0;
+            loseSound.play();
+        }
+        resultText.textContent = "はずれ！";
     }
 
     updateCredit();
 }
 
+
 /* =========================
    ギル更新
 ========================= */
-
 function updateCredit() {
     creditText.textContent = credit;
 
@@ -306,10 +371,10 @@ function updateCredit() {
 
 updateCredit();
 
+
 /* =========================
    RESET
 ========================= */
-
 document
     .getElementById("reset")
     .addEventListener(
@@ -321,8 +386,7 @@ document
             }
 
 
-            credit =
-                START_CREDIT;
+            credit = START_CREDIT;
 
 
             updateCredit();
@@ -358,7 +422,6 @@ spinButton.addEventListener(
 /* =========================
    ハイスコア削除
 ========================= */
-
 document
     .getElementById("clearScore")
     .addEventListener(
@@ -374,7 +437,6 @@ document
 /* =========================
    ランキング取得
 ========================= */
-
 async function loadRanking() {
     const { data, error } =
         await supabaseClient
@@ -409,7 +471,6 @@ async function loadRanking() {
 /* =========================
    スコア登録
 ========================= */
-
 document
     .getElementById("submitScore")
     .addEventListener(
@@ -433,7 +494,6 @@ document
             /* =====================
                既存プレイヤーを確認
             ===================== */
-
             const { data: existing, error: selectError } =
                 await supabaseClient
                     .from("leaderboard")
@@ -455,9 +515,8 @@ document
 
 
             /* =====================
-               すでに登録済み
+               登録済み
             ===================== */
-
             if (existing) {
 
                 /* * 自己ベスト以下なら更新しない */
@@ -468,8 +527,7 @@ document
                 }
 
 
-                /* * 自己ベスト更新 */
-
+                /* 自己ベスト更新 */
                 const { error: updateError } =
                     await supabaseClient
                         .from("leaderboard")
@@ -482,7 +540,6 @@ document
 
 
                 if (updateError) {
-
                     console.error(
                         "スコア更新エラー:",
                         updateError
@@ -500,7 +557,6 @@ document
             /* =====================
                初回登録
             ===================== */
-
             else {
                 const { error: insertError } =
                     await supabaseClient
@@ -536,9 +592,7 @@ loadRanking();
 /* =========================
    sleep
 ========================= */
-
 function sleep(ms) {
-
     return new Promise(
         resolve =>
             setTimeout(
@@ -547,3 +601,18 @@ function sleep(ms) {
             )
     );
 }
+
+
+/* =========================
+   サウンドON/OFF
+========================= */
+const soundToggle = document.getElementById("soundToggle");
+soundToggle.addEventListener(
+    "click",
+    () => {
+        soundEnabled = !soundEnabled;
+        soundToggle.textContent = soundEnabled
+                ? "🔊"
+                : "🔇";
+    }
+);
