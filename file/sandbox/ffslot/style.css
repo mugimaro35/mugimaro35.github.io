@@ -34,6 +34,102 @@ body {
 }
 
 
+body.monochrome {
+    background:
+        linear-gradient(
+            135deg,
+            #111,
+            #222,
+            #333,
+            #444,
+            #555,
+            #666,
+            #777,
+            #888
+        );
+
+    background-size: 400% 400%;
+}
+
+body.monochrome .machine,
+body.monochrome .score-board {
+    filter: grayscale(100%);
+}
+
+img.hand {
+    width: 50px;
+    height: auto;
+    padding: 3px;
+    box-sizing: border-box;
+
+    border: 3px solid transparent;
+    border-radius: 8px;
+
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(
+            90deg,
+            red,
+            #ff5500,
+            yellow,
+            lime,
+            cyan,
+            blue,
+            violet,
+            red
+        ) border-box;
+
+    box-shadow: 0 0 10px #ff5500;
+}
+
+hr {
+    border: 1px solid;
+    color: #ff5500;
+}
+
+
+/* =========================
+   文字
+========================= */
+.copyright {
+    font-size: 11px;
+    color: #ff5500;
+    font-family:
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
+}
+
+#clearScore {
+    position: relative;
+    z-index: 100;
+    cursor: pointer;
+    font-size: 11px;
+    color: red;
+}
+
+#clearScore:hover {
+    color: #aa0000;
+}
+
+#result.lose {
+    color: blue;
+}
+
+.update {
+    text-align: left;
+    font-size: 11px;
+    color: #ff5500;
+    font-family:
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
+}
+
+h3 {
+    color: red;
+}
+
 /* =========================
    背景虹色アニメーション
 ========================= */
@@ -60,7 +156,7 @@ body {
         linear-gradient(
             90deg,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -77,7 +173,7 @@ body {
 
     box-shadow:
         0 0 10px red,
-        0 0 25px orange,
+        0 0 25px #ff5500,
         0 0 50px yellow,
         0 15px 40px #000;
     text-align: center;
@@ -115,7 +211,7 @@ h1 {
         linear-gradient(
             90deg,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -143,31 +239,6 @@ h1 {
 
 
 /* =========================
-   下の文字
-========================= */
-.copyright {
-    font-size: 11px;
-    color: orange;
-    font-family:
-        Arial,
-        "Noto Sans JP",
-        sans-serif;
-}
-
-#clearScore {
-    position: relative;
-    z-index: 100;
-    cursor: pointer;
-    font-size: 11px;
-    color: red;
-}
-
-#clearScore:hover {
-    color: #aa0000;
-}
-
-
-/* =========================
    リール
 ========================= */
 
@@ -187,13 +258,13 @@ h1 {
     background: white;
     border: 5px solid transparent;
     border-radius: 8px;
-    box-shadow: 0 0 10px orange;
+    box-shadow: 0 0 10px #ff5500;
     background:
         linear-gradient(#fff, #fff) padding-box,
         linear-gradient(
             90deg,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -239,7 +310,7 @@ h1 {
     font-size: 24px;
     margin-bottom: 15px;
     color: #ff0000; 
-    text-shadow: 0 0 10px orange;
+    text-shadow: 0 0 10px #ff5500;
 }
 
 
@@ -279,7 +350,7 @@ button {
         linear-gradient(
             90deg,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -291,7 +362,7 @@ button {
     animation: rainbowButton 1.5s linear infinite;
     box-shadow:
         0 0 10px red,
-        0 0 20px orange,
+        0 0 20px #ff5500,
         0 0 30px yellow;
 }
 
@@ -303,7 +374,7 @@ button {
 
 
 #spin:disabled {
-    background: orange;
+    background: #ff5500;
     animation: none;
     cursor: default;
 }
@@ -321,7 +392,7 @@ button {
             blue,
             violet,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -332,7 +403,7 @@ button {
     animation: rainbowButton 1.5s linear infinite;
     box-shadow:
         0 0 10px red,
-        0 0 20px orange,
+        0 0 20px #ff5500,
         0 0 30px yellow;
 }
 
@@ -357,7 +428,7 @@ button {
     margin-top: 15px;
     font-size: 24px;
     font-weight: bold;
-    text-shadow: 0 0 10px orange;
+    text-shadow: 0 0 10px #ff5500;
 }
 
 
@@ -393,7 +464,7 @@ button {
         linear-gradient(
             90deg,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -413,7 +484,7 @@ button {
     /* 発光 */
     filter:
         drop-shadow(0 0 10px red)
-        drop-shadow(0 0 20px orange)
+        drop-shadow(0 0 20px #ff5500)
         drop-shadow(0 0 40px yellow)
         drop-shadow(0 0 70px white);
     animation: reachRainbow 0.5s linear infinite;
@@ -453,20 +524,21 @@ button {
         opacity: 1;
         transform:
             translate(-50%, -50%)
-            scale(1.5);
+            scale(1);
     }
 
     50% {
+        opacity: 1;
         transform:
             translate(-50%, -50%)
-            scale(1);
+            scale(2);
     }
 
     100% {
         opacity: 0;
         transform:
             translate(-50%, -50%)
-            scale(1.2);
+            scale(5);
     }
 }
 
@@ -474,15 +546,26 @@ button {
 /* =========================
    リーチ画面フラッシュ
 ========================= */
-body.reachFlash {
-    animation:
-        reachFlash 0.15s linear 6;
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9998;
 }
 
+
+body.reachFlash::after {
+    animation: reachFlash 0.15s linear 6;
+}
+
+
 @keyframes reachFlash {
-    0% { filter: brightness(1); }
-    50% { filter: brightness(2.5); }
-    100% { filter: brightness(1); }
+    0% { opacity: 0; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0; }
 }
 
 
@@ -502,7 +585,7 @@ body.reachFlash {
         linear-gradient(
             90deg,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -519,7 +602,7 @@ body.reachFlash {
 
     box-shadow:
         0 0 10px red,
-        0 0 25px orange,
+        0 0 25px #ff5500,
         0 0 50px yellow,
         0 15px 40px #000;
 
@@ -538,7 +621,7 @@ body.reachFlash {
         linear-gradient(
             90deg,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -585,7 +668,7 @@ body.reachFlash {
         linear-gradient(
             90deg,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -609,7 +692,7 @@ body.reachFlash {
 
 #playerName:focus {
     box-shadow:
-        0 0 10px orange,
+        0 0 10px #ff5500,
         0 0 20px yellow;
 }
 
@@ -625,7 +708,7 @@ body.reachFlash {
         linear-gradient(
             90deg,
             red,
-            orange,
+            #ff5500,
             yellow,
             lime,
             cyan,
@@ -640,7 +723,7 @@ body.reachFlash {
 
     box-shadow:
         0 0 10px red,
-        0 0 20px orange,
+        0 0 20px #ff5500,
         0 0 30px yellow;
     font-size: 17px;
 }
@@ -660,7 +743,7 @@ body.reachFlash {
     font-weight: bold;
     color: red;
     text-shadow:
-        0 0 8px orange;
+        0 0 8px #ff5500;
 }
 
 
@@ -680,7 +763,7 @@ body.reachFlash {
    ランキング順位カラー
 ========================= */
 .rank-1 { color: red !important; }
-.rank-2 { color: orange !important; }
+.rank-2 { color: #ff5500 !important; }
 .rank-3 { color: yellow !important; }
 .rank-4 { color: lime !important; }
 .rank-5 { color: cyan !important; }
@@ -701,27 +784,18 @@ body.reachFlash {
     position: fixed;
     top: 15px;
     right: 15px;
-
     width: 45px;
     height: 45px;
-
     padding: 0;
-
     border: none;
     border-radius: 50%;
-
     background: white;
     color: black;
-
     font-size: 22px;
-
     cursor: pointer;
-
     z-index: 10000;
-
     box-shadow:
         0 0 10px rgba(0, 0, 0, 0.4);
-
     font-family:
         Arial,
         sans-serif;
@@ -729,4 +803,51 @@ body.reachFlash {
 
 #soundToggle:hover {
     transform: scale(1.1);
+}
+
+
+/* =========================
+   ナフサ切替ボタン
+========================= */
+#monoToggle {
+    position: fixed;
+    top: 15px;
+    right: 70px;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    color: black;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 10000;
+    box-shadow:　0 0 10px rgba(0, 0, 0, 0.4);
+
+    font-family:
+        HG創英角ﾎﾟｯﾌﾟ体,
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
+}
+
+#monoToggle:hover {
+    transform: scale(1.1);
+}
+
+
+/* =========================
+   ナフサ表示
+========================= */
+#gameScreen {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameScreen.monochrome {
+    filter: grayscale(100%);
 }

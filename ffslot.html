@@ -8,12 +8,9 @@
 </head>
 <body>
 
-<button id="soundToggle">🔊</button>
-
 <div class="machine">
 
 <h1>たのしいスロット</h1>
-
 <div class="reels">
 <div class="reel-window"><div class="reel" id="reel0"></div></div>
 <div class="reel-window"><div class="reel" id="reel1"></div></div>
@@ -38,22 +35,26 @@ HIGH SCORE: <span id="highScore">100</span>
 <div class="copyright">
 このスロットに使用されている画像の著作権は@nek7moに帰属します。<br>
 
-現在の絵柄は6種類です。<br>
+現在の絵柄は8種類です。<br>
 <span id="clearScore">HIGH SCOREを削除</span>
 <br><br>
-最終更新: 26.08.16 19:35<br>
+
+最終更新: 26.08.17 03:05
+<br>
 @mugimaro35<br>
 </div>
 
 </div>
 
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
 
 <div class="score-board">
 
 <h2>すごいひとたち</h2>
 
 <div class="ranking-submit">
-
 <input
 type="text"
 id="playerName"
@@ -67,6 +68,99 @@ placeholder="名前"
 <div id="ranking"></div>
 
 </div>
+
+<div class="score-board">
+<h2>役一覧</h2>
+<div class="custom-text">
+
+10ギル
+<p>
+<img src="file/sandbox/ffslot/img/04.png" class="hand">
+<img src="file/sandbox/ffslot/img/04.png" class="hand">
+<img src="file/sandbox/ffslot/img/04.png" class="hand">
+</p>
+
+<hr>
+
+20ギル
+<p>
+<img src="file/sandbox/ffslot/img/06.png" class="hand">
+<img src="file/sandbox/ffslot/img/06.png" class="hand">
+<img src="file/sandbox/ffslot/img/06.png" class="hand">
+</p>
+
+<hr>
+
+50ギル<br>
+<p>
+<img src="file/sandbox/ffslot/img/01.png" class="hand">
+<img src="file/sandbox/ffslot/img/01.png" class="hand">
+<img src="file/sandbox/ffslot/img/01.png" class="hand">
+　
+<img src="file/sandbox/ffslot/img/02.png" class="hand">
+<img src="file/sandbox/ffslot/img/02.png" class="hand">
+<img src="file/sandbox/ffslot/img/02.png" class="hand">
+</p>
+
+<p>
+<img src="file/sandbox/ffslot/img/03.png" class="hand">
+<img src="file/sandbox/ffslot/img/03.png" class="hand">
+<img src="file/sandbox/ffslot/img/03.png" class="hand">
+　
+<img src="file/sandbox/ffslot/img/05.png" class="hand">
+<img src="file/sandbox/ffslot/img/05.png" class="hand">
+<img src="file/sandbox/ffslot/img/05.png" class="hand">
+</p>
+
+<p>
+<img src="file/sandbox/ffslot/img/08.png" class="hand">
+<img src="file/sandbox/ffslot/img/08.png" class="hand">
+<img src="file/sandbox/ffslot/img/08.png" class="hand">
+</p>
+
+<hr>
+
+300ギル
+<p>
+<img src="file/sandbox/ffslot/img/07.png" class="hand">
+<img src="file/sandbox/ffslot/img/07.png" class="hand">
+<img src="file/sandbox/ffslot/img/07.png" class="hand">
+</p>
+
+</div>
+</div>
+
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+
+<div class="score-board">
+<h2>更新履歴</h2>
+<div class="update">
+
+<h3>26.08.17 03:05</h3>
+<ul>
+<li>リール音追加</li>
+<li>リーチ中のリール音追加</li>
+<li>同じ絵柄が3種揃った際の効果音を変更</li>
+<li>同じ絵柄が3種揃った際の配当を絵柄ごとに変更</li>
+<li>リーチ演出の変更</li>
+<li>役一覧を追加</li>
+<li>更新履歴を追加</li>
+<li>ナフサ不足モードを追加</li>
+<li>「はずれ！」の文字色を青に変更</li>
+<li>絵柄を2種追加</li>
+</ul>
+
+</div>
+</div>
+
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+
+<button id="soundToggle">🔊</button>
+<button id="monoToggle">◐</button>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="file/sandbox/ffslot/script.js"></script>

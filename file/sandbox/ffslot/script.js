@@ -1,7 +1,6 @@
 /* =========================
    Supabase
 ========================= */
-
 const SUPABASE_URL =
     "https://cxdctttswqvashlirvca.supabase.co";
 
@@ -18,7 +17,6 @@ const supabaseClient =
 /* =========================
    プレイヤーID
 ========================= */
-
 let playerId =
     localStorage.getItem("slotPlayerId");
 
@@ -40,7 +38,9 @@ const images = [
     "file/sandbox/ffslot/img/03.png",
     "file/sandbox/ffslot/img/04.png",
     "file/sandbox/ffslot/img/05.png",
-    "file/sandbox/ffslot/img/06.png"
+    "file/sandbox/ffslot/img/06.png",
+    "file/sandbox/ffslot/img/07.png",
+    "file/sandbox/ffslot/img/08.png"
 ];
 
 const reels = [
@@ -59,11 +59,32 @@ const SYMBOL_HEIGHT = 150;
    サウンド設定
 ========================= */
 const winSound = new Audio("file/sandbox/ffslot/snd/win.mp3");
+const win3Sound = new Audio("file/sandbox/ffslot/snd/win_3.mp3");
 const loseSound = new Audio("file/sandbox/ffslot/snd/lose.mp3");
 const stopSound = new Audio("file/sandbox/ffslot/snd/stop.mp3");
 const reachSound = new Audio("file/sandbox/ffslot/snd/reach.mp3");
+const spinSound = new Audio("file/sandbox/ffslot/snd/spin.mp3");
+const spinreachSound = new Audio("file/sandbox/ffslot/snd/spin_reach.mp3");
+
 const reachEffect = document.getElementById("reachEffect");
+
 let soundEnabled = true;
+
+
+/* 再生/停止の関数 */
+function playSound(sound) {
+    if (!soundEnabled) {
+        return;
+    }
+
+    sound.currentTime = 0;
+    sound.play();
+}
+
+function stopAudio(sound) {
+    sound.pause();
+    sound.currentTime = 0;
+}
 
 
 /* =========================
@@ -77,12 +98,20 @@ const TWO_MATCH = 30;
 let credit = START_CREDIT;
 let spinning = false;
 
+/* 3枚絵柄 */
+const PAYOUT_GROUPS = {
+    10: [3],
+    20: [5],
+    50: [0, 1, 2, 4, 7],
+    100: [],
+    300: [6]
+};
+
 
 /* =========================
    保存データ
 ========================= */
-let highScore =
-    Number(localStorage.getItem("slotHighScore")) || START_CREDIT;
+let highScore = Number(localStorage.getItem("slotHighScore")) || START_CREDIT;
 
 
 /* =========================
@@ -98,7 +127,7 @@ const highScoreText =
 function createReel(reel) {
     reel.innerHTML = "";
 
-    /* * リールを40個並べる */
+    /* リールを並べる */
 
     for (let i = 0; i < 40; i++) {
         const symbol =
@@ -197,12 +226,12 @@ async function spin() {
         return;
     }
 
+    playSound(spinSound);
     spinning = true;
     spinButton.disabled = true;
     credit -= BET;
     updateCredit();
     resultText.textContent = "";
-
 
     /* リールを初期位置へ戻す */
     reels.forEach(reel => {
@@ -222,10 +251,8 @@ async function spin() {
             900
         );
 
-    if (soundEnabled) {
-        stopSound.currentTime = 0;
-        stopSound.play();
-    }
+        playSound(stopSound);
+        playSound(spinSound);
 
 
     /* 中央 */
@@ -235,11 +262,9 @@ async function spin() {
             reels[1],
             1300
         );
-
-    if (soundEnabled) {
-        stopSound.currentTime = 0;
-        stopSound.play();
-    }
+        stopAudio(spinSound);
+        playSound(stopSound);
+        playSound(spinSound);
 
 
 /* =========================
@@ -250,10 +275,9 @@ async function spin() {
 
     if (reach) {
         /* リーチ音 */
-        if (soundEnabled) {
-            reachSound.currentTime = 0;
-            reachSound.play();
-        }
+            stopAudio(spinSound);
+            playSound(reachSound);
+            playSound(spinreachSound);
 
         /* REACH!!表示 */
         reachEffect.classList.remove("active");
@@ -278,13 +302,15 @@ async function spin() {
     const result2 =
         await spinReel(
             reels[2],
-            reach ? 3000 : 1700
+            reach ? 3400 : 1700
         );
 
-    if (soundEnabled) {
-        stopSound.currentTime = 0;
-        stopSound.play();
-    }
+        stopAudio(spinSound);
+        playSound(stopSound);
+
+        if (reach) {
+            stopAudio(spinreachSound);
+        }
 
 
     /* 結果判定 */
@@ -302,11 +328,12 @@ async function spin() {
 /* =========================
    結果判定
 ========================= */
-
 function judge(results) {
     const a = results[0];
     const b = results[1];
     const c = results[2];
+
+    resultText.classList.remove("lose");
 
     /* 3つ揃い */
     if (
@@ -314,12 +341,19 @@ function judge(results) {
         b === c
     ) {
 
-        credit += JACKPOT;
-        if (soundEnabled) {
-            winSound.currentTime = 0;
-            winSound.play();
+        let payout = 0;
+
+        for (const [amount, symbols] of Object.entries(PAYOUT_GROUPS)) {
+            if (symbols.includes(a)) {
+                payout = Number(amount);
+                break;
+            }
         }
-        resultText.textContent = "うれしい！！！！ +100";
+
+        credit += payout;
+        playSound(win3Sound);
+        resultText.textContent =
+            `うれしい！！！！ +${payout}`;
     }
 
 
@@ -330,21 +364,16 @@ function judge(results) {
         a === c
     ) {
         credit += TWO_MATCH;
-        if (soundEnabled) {
-            winSound.currentTime = 0;
-            winSound.play();
-        }
+        playSound(winSound);
         resultText.textContent = "あたり！ +30";
     }
 
 
     /* はずれ */
     else {
-        if (soundEnabled) {
-            loseSound.currentTime = 0;
-            loseSound.play();
-        }
+        playSound(loseSound);
         resultText.textContent = "はずれ！";
+        resultText.classList.add("lose");
     }
 
     updateCredit();
@@ -380,31 +409,22 @@ document
     .addEventListener(
         "click",
         () => {
-
             if (spinning) {
                 return;
             }
 
 
             credit = START_CREDIT;
-
-
             updateCredit();
-
-
             resultText.textContent =
                 "";
 
-
             reels.forEach(reel => {
-
                 reel.style.transition =
                     "none";
-
                 reel.style.transform =
                     "translateY(0)";
             });
-
         }
     );
 
@@ -412,7 +432,6 @@ document
 /* =========================
    SPINボタン
 ========================= */
-
 spinButton.addEventListener(
     "click",
     spin
@@ -462,7 +481,7 @@ async function loadRanking() {
     data.forEach((entry, index) => {
         const row = document.createElement("div");
         row.className = `rank-${index + 1}`;
-        row.textContent = `${index + 1}位　${entry.player_name}　${entry.score}`;
+        row.textContent = `${index + 1}位　${entry.player_name}　${entry.score}ギル`;
         ranking.appendChild(row);
     });
 }
@@ -614,5 +633,27 @@ soundToggle.addEventListener(
         soundToggle.textContent = soundEnabled
                 ? "🔊"
                 : "🔇";
+    }
+);
+
+
+/* =========================
+   ナフサON/OFF
+========================= */
+const monoToggle = document.getElementById("monoToggle");
+
+monoToggle.addEventListener(
+    "click",
+    () => {
+        document.body.classList.toggle(
+            "monochrome"
+        );
+
+        monoToggle.textContent =
+            document.body.classList.contains(
+                "monochrome"
+            )
+                ? "◑"
+                : "◐";
     }
 );
