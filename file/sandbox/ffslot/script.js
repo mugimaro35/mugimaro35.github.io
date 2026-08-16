@@ -66,6 +66,7 @@ const spinSound = new Audio("file/sandbox/ffslot/snd/spin.mp3");
 const spinreachSound = new Audio("file/sandbox/ffslot/snd/spin_reach.mp3");
 
 const losewakkaSound = new Audio("file/sandbox/ffslot/snd/lose_wakka.mp3");
+const loseyunaSound = new Audio("file/sandbox/ffslot/snd/lose_yuna.mp3");
 const reachkimariSound = new Audio("file/sandbox/ffslot/snd/reach_kimari.mp3");
 const winkimariSound = new Audio("file/sandbox/ffslot/snd/win_kimari.mp3");
 const losekimariSound = new Audio("file/sandbox/ffslot/snd/lose_kimari.mp3");
