@@ -522,7 +522,7 @@ document
                 /* * 自己ベスト以下なら更新しない */
 
                 if (score <= existing.score) {
-                    alert( `自己ベストは ${existing.score} 点です！` );
+                    alert( `自己ベストは ${existing.score} ギルです！` );
                     return;
                 }
 
@@ -550,7 +550,7 @@ document
                 }
 
 
-                alert( `自己ベスト更新！ ${score}点` );
+                alert( `自己ベスト更新！ ${score}ギル` );
             }
 
 
@@ -578,7 +578,7 @@ document
                     return;
                 }
 
-                alert( `ランキングに登録しました！ ${score}点` );
+                alert( `ランキングに登録しました！ ${score}ギル` );
             }
 
             loadRanking();
