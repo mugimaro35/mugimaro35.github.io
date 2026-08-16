@@ -66,6 +66,10 @@ const reachSound = new Audio("file/sandbox/ffslot/snd/reach.mp3");
 const spinSound = new Audio("file/sandbox/ffslot/snd/spin.mp3");
 const spinreachSound = new Audio("file/sandbox/ffslot/snd/spin_reach.mp3");
 
+const reachkimariSound = new Audio("file/sandbox/ffslot/snd/reach_kimari.mp3");
+const winkimariSound = new Audio("file/sandbox/ffslot/snd/win_kimari.mp3");
+const losekimariSound = new Audio("file/sandbox/ffslot/snd/lose_kimari.mp3");
+
 const reachEffect = document.getElementById("reachEffect");
 
 let soundEnabled = true;
@@ -85,6 +89,23 @@ function stopAudio(sound) {
     sound.pause();
     sound.currentTime = 0;
 }
+
+
+/* 特殊サウンド */
+const SPECIAL_SYMBOLS = {
+    3: {
+        reach: reachkimariSound,
+        win: winkimariSound,
+        lose: losekimariSound
+    }
+
+    // 新規追加は以下
+    // 6: {
+    //     reach: reach07Sound,
+    //     win: win07Sound,
+    //     lose: lose07Sound
+    // }
+};
 
 
 /* =========================
@@ -276,8 +297,16 @@ async function spin() {
     if (reach) {
         /* リーチ音 */
             stopAudio(spinSound);
-            playSound(reachSound);
-            playSound(spinreachSound);
+
+            /* 特殊リーチ確認 */
+            const special = SPECIAL_SYMBOLS[result0];
+
+            if (special) {
+                playSound(special.reach);
+            } else {
+                playSound(reachSound);
+                playSound(spinreachSound);
+            }
 
         /* REACH!!表示 */
         reachEffect.classList.remove("active");
@@ -288,6 +317,7 @@ async function spin() {
         document.body.classList.remove("reachFlash");
         void document.body.offsetWidth;
         document.body.classList.add("reachFlash");
+
         document.body.addEventListener(
             "animationend",
             () => {
@@ -343,7 +373,10 @@ function judge(results) {
 
         let payout = 0;
 
-        for (const [amount, symbols] of Object.entries(PAYOUT_GROUPS)) {
+        for (
+            const [amount, symbols]
+            of Object.entries(PAYOUT_GROUPS)
+        ) {
             if (symbols.includes(a)) {
                 payout = Number(amount);
                 break;
@@ -351,11 +384,33 @@ function judge(results) {
         }
 
         credit += payout;
-        playSound(win3Sound);
+
+        /* 特殊絵柄か確認 */
+        const special = SPECIAL_SYMBOLS[a];
+
+        if (special) {
+            playSound(special.win);
+        } else {
+            playSound(win3Sound);
+        }
+
         resultText.textContent =
             `うれしい！！！！ +${payout}`;
     }
 
+
+    /* 特殊リーチ失敗 */
+    else if (
+        a === b &&
+        SPECIAL_SYMBOLS[a]
+    ) {
+
+        playSound(
+            SPECIAL_SYMBOLS[a].lose
+        );
+
+        resultText.textContent = "あたり！ +30";
+    }
 
     /* 2つ揃い */
     else if (
@@ -371,8 +426,12 @@ function judge(results) {
 
     /* はずれ */
     else {
+
         playSound(loseSound);
-        resultText.textContent = "はずれ！";
+
+        resultText.textContent =
+            "はずれ！";
+
         resultText.classList.add("lose");
     }
 
