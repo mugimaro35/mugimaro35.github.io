@@ -43,6 +43,8 @@ const images = [
     "file/sandbox/ffslot/img/08.png"
 ];
 
+const REEL_COUNT = 5;
+
 const reels = [
     document.getElementById("reel0"),
     document.getElementById("reel1"),
@@ -66,9 +68,11 @@ const reachSound = new Audio("file/sandbox/ffslot/snd/reach.mp3");
 const spinSound = new Audio("file/sandbox/ffslot/snd/spin.mp3");
 const spinreachSound = new Audio("file/sandbox/ffslot/snd/spin_reach.mp3");
 
+const losewakkaSound = new Audio("file/sandbox/ffslot/snd/lose_wakka.mp3");
 const reachkimariSound = new Audio("file/sandbox/ffslot/snd/reach_kimari.mp3");
 const winkimariSound = new Audio("file/sandbox/ffslot/snd/win_kimari.mp3");
 const losekimariSound = new Audio("file/sandbox/ffslot/snd/lose_kimari.mp3");
+
 
 const reachEffect = document.getElementById("reachEffect");
 
@@ -93,18 +97,15 @@ function stopAudio(sound) {
 
 /* 特殊サウンド */
 const SPECIAL_SYMBOLS = {
+    0: {
+        lose: losewakkaSound
+    },
+
     3: {
         reach: reachkimariSound,
         win: winkimariSound,
         lose: losekimariSound
     }
-
-    // 新規追加は以下
-    // 6: {
-    //     reach: reach07Sound,
-    //     win: win07Sound,
-    //     lose: lose07Sound
-    // }
 };
 
 
@@ -148,20 +149,15 @@ const highScoreText =
 function createReel(reel) {
     reel.innerHTML = "";
 
-    /* リールを並べる */
-
-    for (let i = 0; i < 40; i++) {
-        const symbol =
-            document.createElement("div");
+    for (
+        let i = 0;
+        i < images.length * REEL_COUNT;
+        i++
+    ) {
+        const symbol = document.createElement("div");
         symbol.className = "symbol";
-
-        const img =
-            document.createElement("img");
-
-        img.src =
-            images[
-                i % images.length
-            ];
+        const img = document.createElement("img");
+        img.src = images[i % images.length];
 
         symbol.appendChild(img);
         reel.appendChild(symbol);
@@ -200,7 +196,7 @@ function spinReel(
 
         /* * 停止位置 */
         const targetIndex =
-            30 +
+            (images.length * (REEL_COUNT - 1)) +
             finalSymbol;
 
 
@@ -301,7 +297,7 @@ async function spin() {
             /* 特殊リーチ確認 */
             const special = SPECIAL_SYMBOLS[result0];
 
-            if (special) {
+            if (special?.reach) {
                 playSound(special.reach);
             } else {
                 playSound(reachSound);
@@ -388,7 +384,7 @@ function judge(results) {
         /* 特殊絵柄か確認 */
         const special = SPECIAL_SYMBOLS[a];
 
-        if (special) {
+        if (special?.win) {
             playSound(special.win);
         } else {
             playSound(win3Sound);
@@ -402,7 +398,7 @@ function judge(results) {
     /* 特殊リーチ失敗 */
     else if (
         a === b &&
-        SPECIAL_SYMBOLS[a]
+        SPECIAL_SYMBOLS[a]?.lose
     ) {
 
         playSound(
