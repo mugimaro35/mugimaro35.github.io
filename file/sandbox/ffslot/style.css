@@ -500,6 +500,27 @@ button {
 
 
 /* =========================
+   特殊リーチ画像
+========================= */
+
+#reachEffect.image {
+    width: 500px;
+    height: 500px;
+}
+
+#reachEffect.image span {
+    display: none;
+}
+
+#reachEffect.image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* =========================
    虹色だけ動かす
 ========================= */
 @keyframes reachRainbow {

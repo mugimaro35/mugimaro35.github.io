@@ -72,10 +72,11 @@ const winkimariSound = new Audio("file/sandbox/ffslot/snd/win_kimari.mp3");
 const losekimariSound = new Audio("file/sandbox/ffslot/snd/lose_kimari.mp3");
 
 const reachEffect = document.getElementById("reachEffect");
+const reachImage = document.getElementById("reachImage");
 let soundEnabled = true;
 
 
-/* 特殊サウンド */
+/* 特殊演出 */
 const SPECIAL_SYMBOLS = {
     0: {
         lose: losewakkaSound
@@ -92,7 +93,8 @@ const SPECIAL_SYMBOLS = {
     },
 
     6: {
-        lose: losewakkaSound
+        lose: losewakkaSound,
+        reachImage: "file/sandbox/ffslot/img/reach_wakkaR.png"
     }
 };
 
@@ -321,10 +323,26 @@ async function spin() {
                 playSound(spinreachSound);
             }
 
-        /* REACH!!表示 */
-        reachEffect.classList.remove("active");
-        void reachEffect.offsetWidth;
-        reachEffect.classList.add("active");
+    /* リーチ表示 */
+    const reachSpecial = SPECIAL_SYMBOLS[result0];
+
+    /* 特殊リーチ画像 */
+    if (reachSpecial?.reachImage) {
+        reachImage.src = reachSpecial.reachImage;
+        reachEffect.classList.add("image");
+    } else {
+
+        /* 通常のREACH!! */
+        reachImage.src = "";
+        reachEffect.classList.remove("image");
+    }
+
+
+    /* リーチ演出開始 */
+    reachEffect.classList.remove("active");
+    void reachEffect.offsetWidth;
+    reachEffect.classList.add("active");
+
 
         /* 画面フラッシュ */
         document.body.classList.remove("reachFlash");
