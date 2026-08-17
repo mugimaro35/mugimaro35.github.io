@@ -31,13 +31,7 @@ if (!playerId) {
 ========================= */
 const images = [
     "file/sandbox/ffslot/img/01.png",
-    "file/sandbox/ffslot/img/02.png",
-    "file/sandbox/ffslot/img/03.png",
-    "file/sandbox/ffslot/img/04.png",
-    "file/sandbox/ffslot/img/05.png",
-    "file/sandbox/ffslot/img/06.png",
-    "file/sandbox/ffslot/img/07.png",
-    "file/sandbox/ffslot/img/08.png"
+    "file/sandbox/ffslot/img/02.png"
 ];
 
 const REEL_COUNT = 5;
@@ -132,20 +126,77 @@ function stopAudio(sound) {
    ゲーム設定
 ========================= */
 const START_CREDIT = 100;
-const BET = 10;
+let BET = 10;
 const JACKPOT = 100;
-const TWO_MATCH = 30;
+const TWO_MATCH_MULTIPLIER = 3;
 
 let credit = START_CREDIT;
 let spinning = false;
 
 /* 3枚絵柄 */
+/* 報酬は桁が+1 */
 const PAYOUT_GROUPS = {
-    20: [3],
-    40: [5],
-    50: [0, 1, 2, 4, 7],
-    300: [6]
+    2: [3],
+    4: [5],
+    5: [0, 1, 2, 4, 7],
+    30: [6]
 };
+
+
+/* =========================
+   BET設定
+========================= */
+const betAmount = document.getElementById("betAmount");
+const betButtons = document.querySelectorAll(".betButton");
+const betReset = document.getElementById("betReset");
+
+/* BET追加 */
+betButtons.forEach(button => {
+    button.addEventListener(
+        "click",
+        () => {
+            if (spinning) {
+                return;
+            }
+
+            const value = button.dataset.bet;
+
+
+            /* MAX */
+            if (value === "max") {
+                BET = credit;
+            }
+
+
+            /* 通常 */
+            else {
+                const amount = Number(value);
+                if (BET + amount > credit) {
+                    return;
+                }
+
+                BET += amount;
+            }
+
+            betAmount.textContent = BET;
+        }
+    );
+});
+
+
+/* BETリセット */
+betReset.addEventListener(
+    "click",
+    () => {
+        if (spinning) {
+            return;
+        }
+
+        BET = 10;
+        betAmount.textContent =
+            BET;
+    }
+);
 
 
 /* =========================
@@ -395,71 +446,73 @@ function judge(results) {
 
     resultText.classList.remove("lose");
 
-    /* 3つ揃い */
-    if (
-        a === b &&
-        b === c
+
+/* 3つ揃い */
+if (
+    a === b &&
+    b === c
+) {
+
+    let multiplier = 0;
+    for (
+        const [amount, symbols]
+        of Object.entries(PAYOUT_GROUPS)
     ) {
-
-        let payout = 0;
-
-        for (
-            const [amount, symbols]
-            of Object.entries(PAYOUT_GROUPS)
-        ) {
-            if (symbols.includes(a)) {
-                payout = Number(amount);
-                break;
-            }
+        if (symbols.includes(a)) {
+            multiplier = Number(amount);
+            break;
         }
-
-        credit += payout;
-
-        /* 特殊絵柄か確認 */
-        const special = SPECIAL_SYMBOLS[a];
-
-        if (special?.win) {
-            playSound(special.win);
-        } else {
-            playSound(win3Sound);
-        }
-
-        resultText.textContent =
-            `うれしい！！！！ +${payout}`;
     }
 
+    const payout = BET * multiplier;
+    credit += payout;
 
-    /* 特殊リーチ失敗 */
-    else if (
-        a === b &&
-        SPECIAL_SYMBOLS[a]?.lose
-    ) {
 
-        credit += TWO_MATCH;
-        playSound( SPECIAL_SYMBOLS[a].lose );
-        resultText.textContent = "あたり！ +30";
+    /* 特殊絵柄か確認 */
+    const special =
+        SPECIAL_SYMBOLS[a];
+
+    if (special?.win) {
+        playSound(special.win);
+    } else {
+        playSound(win3Sound);
     }
+
+    resultText.textContent =
+        `うれしい！！！！ +${payout}`;
+}
+
+
+/* 特殊リーチ失敗 */
+else if (
+    a === b &&
+    SPECIAL_SYMBOLS[a]?.lose
+) {
+    const payout = BET * TWO_MATCH_MULTIPLIER;
+    credit += payout;
+    playSound( SPECIAL_SYMBOLS[a].lose );
+    resultText.textContent = `あたり！ +${payout}`;
+}
+
 
     /* 2つ揃い */
-    else if (
-        a === b ||
-        b === c ||
-        a === c
-    ) {
-        credit += TWO_MATCH;
-        playSound(winSound);
-        resultText.textContent = "あたり！ +30";
-    }
+else if (
+    a === b ||
+    b === c ||
+    a === c
+) {
+    const payout = BET * TWO_MATCH_MULTIPLIER;
+    credit += payout;
+    playSound(winSound);
+    resultText.textContent =
+        `あたり！ +${payout}`;
+}
 
 
     /* はずれ */
     else {
-
         playSound(loseSound);
-
-        resultText.textContent =
-            "はずれ！";
-
+        resultText.textContent = "はずれ！";
         resultText.classList.add("lose");
     }
 
