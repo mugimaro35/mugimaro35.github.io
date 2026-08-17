@@ -1,7 +1,4 @@
-/* =========================
-   ハイスコア取得
-========================= */
-let highScore = Number(localStorage.getItem("slotHighScore")) || START_CREDIT;
+
 
 
 /* =========================

@@ -3,6 +3,11 @@
 ========================= */
 let credit = START_CREDIT;
 let spinning = false;
+
+
+/* =========================
+   ハイスコア取得
+========================= */
 let highScore = Number(localStorage.getItem("slotHighScore")) || START_CREDIT;
 
 
