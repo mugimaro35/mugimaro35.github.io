@@ -910,3 +910,17 @@ body.reachFlash::after {
 #gameScreen.monochrome {
     filter: grayscale(100%);
 }
+
+
+/* =========================
+   スマホ対応
+========================= */
+@media (max-width: 600px) {
+
+    .machine,
+    .score-board {
+        width: 95%;
+        max-width: 520px;
+    }
+
+}
