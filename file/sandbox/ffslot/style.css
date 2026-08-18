@@ -91,6 +91,16 @@ hr {
 /* =========================
    文字
 ========================= */
+a {
+color: red;
+text-decoration: none;
+}
+
+a.dopa {
+color: #ff5500;
+text-decoration: none;
+}
+
 .copyright {
     font-size: 11px;
     color: #ff5500;
@@ -341,7 +351,7 @@ button {
 
 
 /* =========================
-   BET
+   ボタン/BET
 ========================= */
 #betControl {
     margin-bottom: 15px;
@@ -408,10 +418,17 @@ button {
 }
 
 
+/* =========================
+   ボタン/AUTO
+========================= */
+#autoSpin {
+    color: white;
+    background: red;
+}
 
 
 /* =========================
-   SPIN
+   ボタン/SPIN
 ========================= */
 
 #spin {
@@ -451,30 +468,12 @@ button {
 
 
 /* =========================
-   RESET
+   ボタン/RESET
 ========================= */
 
 #reset {
     color: white;
-    background:
-        linear-gradient(
-            90deg,
-            blue,
-            violet,
-            red,
-            #ff5500,
-            #ffcc00,
-            lime,
-            cyan,
-            blue
-        );
-
-    background-size: 400%;
-    animation: rainbowButton 1.5s linear infinite;
-    box-shadow:
-        0 0 10px red,
-        0 0 20px #ff5500,
-        0 0 30px #ffcc00;
+    background: blue;
 }
 
 

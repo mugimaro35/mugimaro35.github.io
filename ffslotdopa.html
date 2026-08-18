@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>たのしいスロット</title>
+<link rel="stylesheet" href="file/sandbox/ffslot/style.css">
+</head>
+<body>
+
+<div class="machine">
+
+<h1>たのしいドパスロット</h1>
+<div id="onlineCount">現在0人がプレイ中</div><br>
+<div class="reels">
+<div class="reel-window"><div class="reel" id="reel0"></div></div>
+<div class="reel-window"><div class="reel" id="reel1"></div></div>
+<div class="reel-window"><div class="reel" id="reel2"></div></div>
+</div>
+<div id="reachEffect">
+    <span>REACH!!</span>
+    <img id="reachImage">
+</div>
+
+<div class="info">
+Gill: <span id="credit">100</span><br>
+HIGH SCORE: <span id="highScore">100</span>
+</div>
+
+<br>
+
+
+<div id="betControl">
+<div id="betText">BET: <span id="betAmount">10</span>ギル</div>
+
+<div id="betButtons">
+<button class="betButton" data-bet="10">+10</button>
+<button class="betButton" data-bet="50">+50</button>
+<button class="betButton" data-bet="100">+100</button>
+<button class="betButton" data-bet="max">MAX</button>
+<button id="betReset">BET RESET</button>
+</div>
+</div>
+
+<div class="buttons">
+<button id="autoSpin">AUTO</button>
+<button id="spin">SPIN</button>
+<button id="reset">RESET</button>
+</div>
+
+<div id="result"></div>
+
+<div class="copyright">
+このスロットに使用されている画像の著作権は@nek7moに帰属します。<br>
+一部仕様がたのしいスロットとは異なります。<br>
+<span id="clearScore">HIGH SCOREを削除</span>
+<br><br>
+
+@mugimaro35<br>
+</div>
+
+</div>
+
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+
+<div class="score-board">
+<h2>役一覧</h2>
+<div class="custom-text">
+
+×10
+<p>
+<img src="file/sandbox/ffslot/img/00.png" class="hand">
+<img src="file/sandbox/ffslot/img/00.png" class="hand">
+</p>
+
+<hr>
+
+×30<br>
+<p>
+<img src="file/sandbox/ffslot/img/01.png" class="hand">
+<img src="file/sandbox/ffslot/img/01.png" class="hand">
+<img src="file/sandbox/ffslot/img/01.png" class="hand">
+
+<hr>
+
+×50
+<p>
+<img src="file/sandbox/ffslot/img/07.png" class="hand">
+<img src="file/sandbox/ffslot/img/07.png" class="hand">
+<img src="file/sandbox/ffslot/img/07.png" class="hand">
+</p>
+
+</div>
+</div>
+
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+
+<div id="volumeControl">
+    <button id="soundToggle">🔊</button>
+
+    <input
+        type="range"
+        id="volumeSlider"
+        min="0"
+        max="100"
+        value="100"
+    >
+</div>
+<button id="monoToggle">◐</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="file/sandbox/ffslot/js/dopaconfig.js"></script>
+<script src="file/sandbox/ffslot/js/main.js"></script>
+<script src="file/sandbox/ffslot/js/sound.js"></script>
+<script src="file/sandbox/ffslot/js/reel.js"></script>
+<script src="file/sandbox/ffslot/js/bet.js"></script>
+<script src="file/sandbox/ffslot/js/dopagame.js"></script>
+<script src="file/sandbox/ffslot/js/doparanking.js"></script>
+<script src="file/sandbox/ffslot/js/online.js"></script>
+
+</body>
+</html>

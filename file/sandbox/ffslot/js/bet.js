@@ -11,7 +11,7 @@ betButtons.forEach(button => {
     button.addEventListener(
         "click",
         () => {
-            if (spinning) {
+            if (spinning || autoSpinning) {
                 return;
             }
 
@@ -45,12 +45,11 @@ betButtons.forEach(button => {
 betReset.addEventListener(
     "click",
     () => {
-        if (spinning) {
+        if (spinning || autoSpinning) {
             return;
         }
 
         BET = 10;
-        betAmount.textContent =
-            BET;
+        betAmount.textContent = BET;
     }
 );

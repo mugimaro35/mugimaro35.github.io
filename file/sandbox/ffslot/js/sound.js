@@ -1,10 +1,6 @@
-
-
-
 /* =========================
    再生/停止の関数
 ========================= */
-
 function playSound(sound) {
     if (!soundEnabled) {
         return;
@@ -19,6 +15,18 @@ function playSound(sound) {
 function stopAudio(sound) {
     sound.pause();
     sound.currentTime = 0;
+}
+
+
+/* =========================
+   特殊WIN音を全部停止
+========================= */
+function stopSpecialWinSounds() {
+    Object.values(SPECIAL_SYMBOLS).forEach(special => {
+        if (special?.win) {
+            stopAudio(special.win);
+        }
+    });
 }
 
 

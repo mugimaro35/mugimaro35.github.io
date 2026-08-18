@@ -43,7 +43,7 @@ async function spin() {
     }
 
     /* 前回の特殊WIN音を停止 */
-    stopSpecialWinSounds();
+    /* stopSpecialWinSounds(); */
 
     if (credit < BET) {
         resultText.textContent =
