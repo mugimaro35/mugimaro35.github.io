@@ -78,6 +78,7 @@ const spinSound = new Audio("file/sandbox/ffslot/snd/spin.mp3");
 const spinreachSound = new Audio("file/sandbox/ffslot/snd/spin_reach.mp3");
 /* ================================================================================ */
 const losewakkaSound = new Audio("file/sandbox/ffslot/snd/lose_wakka.mp3");
+
 const loseyunaSound = new Audio("file/sandbox/ffslot/snd/lose_yuna.mp3");
 
 const reachkimariSound = new Audio("file/sandbox/ffslot/snd/reach_kimari.mp3");
@@ -89,6 +90,10 @@ const winluluSound = new Audio("file/sandbox/ffslot/snd/win_lulu.mp3");
 const loseluluSound = new Audio("file/sandbox/ffslot/snd/lose_lulu.mp3");
 
 const winwakkaRSound = new Audio("file/sandbox/ffslot/snd/win_wakkaR.mp3");
+
+const reachauronSound = new Audio("file/sandbox/ffslot/snd/reach_auron.mp3");
+const winauronSound = new Audio("file/sandbox/ffslot/snd/win_auron.mp3");
+const loseauronSound = new Audio("file/sandbox/ffslot/snd/lose_auron.mp3");
 
 
 /* =========================
@@ -120,5 +125,11 @@ const SPECIAL_SYMBOLS = {
         lose: losewakkaSound,
         reachImage: "file/sandbox/ffslot/img/reach_wakkaR.png",
         background: "file/sandbox/ffslot/img/bg_wakkaR.png"
+    },
+
+    7: {
+        reach: reachauronSound,
+        win: winauronSound,
+        lose: loseauronSound
     }
 };

@@ -282,8 +282,7 @@ document
                 return;
             }
 
-            const confirmReset =
-                confirm("RESET？");
+            const confirmReset = confirm("リセットしますか？");
 
             if (!confirmReset) {
                 return;
