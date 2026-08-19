@@ -277,7 +277,14 @@ document
     .addEventListener(
         "click",
         () => {
+
             if (spinning) {
+                return;
+            }
+
+            const confirmReset = confirm("リセットしますか？");
+
+            if (!confirmReset) {
                 return;
             }
 
@@ -291,8 +298,7 @@ document
             document.body.style.backgroundImage = "";
 
             reels.forEach(reel => {
-                reel.style.transition =
-                    "none";
+                reel.style.transition = "none";
                 reel.style.transform =
                     "translateY(0)";
             });
