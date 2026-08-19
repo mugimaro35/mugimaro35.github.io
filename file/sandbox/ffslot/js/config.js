@@ -118,6 +118,7 @@ const SPECIAL_SYMBOLS = {
     6: {
         win: winwakkaRSound,
         lose: losewakkaSound,
-        reachImage: "file/sandbox/ffslot/img/reach_wakkaR.png"
+        reachImage: "file/sandbox/ffslot/img/reach_wakkaR.png",
+        background: "file/sandbox/ffslot/img/bg_wakkaR.png"
     }
 };

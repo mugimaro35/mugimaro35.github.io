@@ -56,6 +56,10 @@ body.monochrome .score-board {
     filter: grayscale(100%);
 }
 
+body.specialBackground {
+    background-size: cover;
+}
+
 img.hand {
     width: 50px;
     height: auto;

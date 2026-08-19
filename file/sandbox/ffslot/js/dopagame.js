@@ -210,13 +210,20 @@ function judge(results) {
 
 
     /* 特殊絵柄か確認 */
-    const special =
-        SPECIAL_SYMBOLS[a];
+    const special = SPECIAL_SYMBOLS[a];
 
+    /* 特殊音と背景 */
     if (special?.win) {
         playSound(special.win);
     } else {
         playSound(win3Sound);
+    }
+
+    if (special?.background) {
+        document.body.style.backgroundImage =
+            `url("${special.background}")`;
+
+        document.body.classList.add("specialBackground");
     }
 
     resultText.textContent =
@@ -273,11 +280,14 @@ document
                 return;
             }
 
-
             credit = START_CREDIT;
             updateCredit()
-            resultText.textContent =
-                "";
+            resultText.textContent = "";
+
+            /* 特殊音・背景を解除 */
+            stopSpecialWinSounds();
+            document.body.classList.remove("specialBackground");
+            document.body.style.backgroundImage = "";
 
             reels.forEach(reel => {
                 reel.style.transition =
