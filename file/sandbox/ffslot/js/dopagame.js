@@ -42,8 +42,9 @@ async function spin() {
         return;
     }
 
-    /* 前回の特殊WIN音を停止 */
+    /* 前回の特殊WIN音と背景を停止 */
     /* stopSpecialWinSounds(); */
+    /* document.body.style.backgroundImage = ""; */
 
     if (credit < BET) {
         resultText.textContent =
