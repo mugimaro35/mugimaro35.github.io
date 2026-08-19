@@ -9,7 +9,7 @@ let autoSpinning = false;
 /* =========================
    ハイスコア取得
 ========================= */
-let highScore = Number(localStorage.getItem("slotHighScore")) || START_CREDIT;
+let highScore = Number(localStorage.getItem("dopaslotHighScore")) || START_CREDIT;
 
 
 /* =========================
@@ -22,7 +22,7 @@ function updateCredit() {
         highScore = credit;
 
         localStorage.setItem(
-            "slotHighScore",
+            "dopaslotHighScore",
             highScore
         );
     }

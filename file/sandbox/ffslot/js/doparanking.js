@@ -6,7 +6,7 @@ document
     .addEventListener(
         "click",
         () => {
-            localStorage.removeItem("slotHighScore");
+            localStorage.removeItem("dopaslotHighScore");
             highScore = START_CREDIT;
             highScoreText.textContent = highScore;
         }
